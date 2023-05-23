@@ -1,13 +1,11 @@
-import Header from './components/Header';
+import { Outlet } from 'react-router-dom';
+import SignUp from './screens/SignUp';
 function App() {
-  return (
-    <div className="App">
-      <div className='mx-20'>
-        <Header />
-        <hr />
-      </div>
-    </div>
-  );
+	return (
+		<div className="App">
+					<Outlet />
+		</div>
+	);
 }
 
 export default App;
