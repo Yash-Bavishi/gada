@@ -10,6 +10,8 @@ const salt = await bcrypt.genSalt(10)
 
 const loginRoute = asyncHandler(async(req,res) => {
     const {email, password} = req.body
+    console.log(email)
+    console.log(password)
     // Only findOne or single user has custom method
     const user = await User.findOne({email})
     if(!user) {

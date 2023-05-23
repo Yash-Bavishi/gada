@@ -1,6 +1,29 @@
-import React from 'react'
+import {React, useState} from 'react'
 import { GiSpectacleLenses } from 'react-icons/gi'
+import { useLoginMutation } from '../slices/user/userApiSlice'
+import { useSelector, useDispatch } from 'react-redux'
+import { setCredentials } from '../slices/user/authSlice'
 function SignIn() {
+
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const dispatch = useDispatch()
+    const { userInfo } = useSelector((state) => state.auth)
+    const [login] = useLoginMutation()
+    const loginHandler = async (e) => {
+        e.preventDefault()
+        try {
+            console.log(email)
+            console.log(password)
+            const res = await login({email,password}).unwrap()
+            dispatch(setCredentials({...res}))
+            console.log(res)
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+
   return (
 		<div className="text-white flex flex-col items-center w-full">
 			<div className="logo flex flex-row items-center gap-1 text-5xl">
@@ -10,13 +33,13 @@ function SignIn() {
 				<h1 className='text-3xl'>Sign In</h1>
             <div className='flex flex-col gap-2'>
                 <label htmlFor="email">Enter your email</label>
-                <input type="email" className="bg-transparent border-2 border-white py-2 px-2 rounded-2xl" placeholder='Enter your email' />
+                <input type="email" className="bg-transparent border-2 border-white py-2 px-2 rounded-2xl" placeholder='Enter your email' onChange={(e) => setEmail(e.target.value)}/>
             </div>
             <div className='flex flex-col gap-2'>
                 <label htmlFor="password">Enter your password</label>
-                <input type="password" className="bg-transparent border-2 border-white py-2 px-2 rounded-2xl" placeholder='Enter your password' />
+                <input type="password" className="bg-transparent border-2 border-white py-2 px-2 rounded-2xl" placeholder='Enter your password' onChange={(e) => setPassword(e.target.value)}/>
             </div>
-            <input type="submit" value="Sign in" className='self-center py-2 px-3 border-2 border-white rounded-2xl w-60' />
+            <input type="submit" value="Sign in" className='self-center py-2 px-3 border-2 border-white rounded-2xl w-60' onClick={loginHandler}/>
             </div>
 			<p>Don't have an account ? <span className='text-cyan-800'>Sign Up</span></p>
         </div>
