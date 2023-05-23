@@ -1,5 +1,28 @@
 import { GiSpectacleLenses } from 'react-icons/gi'
+import { useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { setCredentials } from '../slices/authSlice'
+import { useRegisterMutation } from '../slices/userApiSlice'
+
 function SignUp() {
+
+	const [name, setName] = useState('')
+	const [email, setEmail] = useState('')
+	const [password, setPassword] = useState('')
+	const [confirmPassword, setConfirmPassword] = useState('')
+	const dispatch = useDispatch()
+	const {userInfo} = useSelector((state) => state.auth)
+	const [register] = useRegisterMutation()
+	const registerHandler = async (e) => {
+		e.preventDefault()
+		try {
+			const res = await register({name, email, password, confirmPassword}).unwrap()
+			dispatch(setCredentials({...res}))
+		} catch (error) {
+			console.log(error)	
+		}
+	}
+
 	return (
 		<div className="text-white flex flex-col justify-center items-center w-full">
 			<div className="logo flex flex-row items-center gap-1 text-5xl">
@@ -10,7 +33,7 @@ function SignUp() {
 				<form action="" className='flex flex-col gap-5 '>
 					<div>
 						<label htmlFor="name">You name</label><br />
-						<input type="text" placeholder='First and last name' className='bg-transparent border-white border-2 py-1 px-1 rounded-1xl' />
+						<input type="text" placeholder='First and last name' className='bg-transparent border-white border-2 py-1 px-1 rounded-1xl' onChange={(e) => setName(e.target.value)}/>
 					</div>
 					<div className='flex flex-col gap-1'>
 						<label htmlFor="mobile">Mobile Number</label>
@@ -24,18 +47,18 @@ function SignUp() {
 						</div>
 					</div>
 					<div>
-						<label htmlFor="Email">Enter your number</label><br />
-						<input type="email" placeholder='Enter email' className='bg-transparent border-white border-2 py-1 px-1 rounded-1xl' />
+						<label htmlFor="Email">Enter your Email</label><br />
+						<input type="email" placeholder='Enter email' className='bg-transparent border-white border-2 py-1 px-1 rounded-1xl' onChange={(e) => setEmail(e.target.value)}/>
 					</div>
 					<div>
 						<label htmlFor="password">Enter your password</label><br />
-						<input type="password" placeholder='Enter password' className='bg-transparent border-white border-2 py-1 px-1 rounded-1xl' />
+						<input type="password" placeholder='Enter password' className='bg-transparent border-white border-2 py-1 px-1 rounded-1xl' onChange={(e) => setPassword(e.target.value)}/>
 					</div>
 					<div>
 						<label htmlFor="confirmPassword">Confirm Password</label><br />
-						<input type="confirmPassword" placeholder='Enter confirm password' className='bg-transparent border-white border-2 py-1 px-1 rounded-1xl' />
+						<input type="password" placeholder='Enter confirm password' className='bg-transparent border-white border-2 py-1 px-1 rounded-1xl' onChange={(e) => setConfirmPassword(e.target.value)}/>
 					</div>
-					<input type="submit" className='border-2 border-white self-center w-56' />
+					<input type="submit" className='border-2 border-white self-center w-56' onClick={registerHandler}/>
 				</form>
 			</div>
 			<p>Already have an account ? <span className='text-cyan-800'>Sign In</span></p>

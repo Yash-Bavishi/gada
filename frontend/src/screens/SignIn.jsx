@@ -1,25 +1,22 @@
-import {React, useState} from 'react'
+import {React, useInsertionEffect, useState} from 'react'
 import { GiSpectacleLenses } from 'react-icons/gi'
-import { useLoginMutation } from '../slices/user/userApiSlice'
-import { useSelector, useDispatch } from 'react-redux'
-import { setCredentials } from '../slices/user/authSlice'
+import { useSelector, useDispatch} from 'react-redux'
+import {setCredentials} from '../slices/authSlice'
+import { useLoginMutation } from '../slices/userApiSlice'
 function SignIn() {
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const dispatch = useDispatch()
-    const { userInfo } = useSelector((state) => state.auth)
+    const {useInfo}  = useSelector((state) => state.auth)
     const [login] = useLoginMutation()
     const loginHandler = async (e) => {
-        e.preventDefault()
         try {
-            console.log(email)
-            console.log(password)
-            const res = await login({email,password}).unwrap()
+            console.log(login)
+            const res = await login({email, password}).unwrap() 
             dispatch(setCredentials({...res}))
-            console.log(res)
-        } catch (err) {
-            console.log(err)
+        } catch (error) {
+           console.log(error) 
         }
     }
 

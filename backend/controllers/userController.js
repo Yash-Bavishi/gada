@@ -14,12 +14,8 @@ const loginRoute = asyncHandler(async(req,res) => {
     console.log(password)
     // Only findOne or single user has custom method
     const user = await User.findOne({email})
-    if(!user) {
-        res.status(401)
-        throw new Error("User not Found")
-    }
 
-    if(user.matchPassword(password)) {
+    if(user && (await user.matchPassword(password))) {
         await generateToken(res, user._id);
         res.status(201).json({message: {email: user.email, name: user.name}})
     } else {

@@ -8,8 +8,8 @@ import HomeScreen from './screens/HomeScreen';
 import SignUp from './screens/SignUp';
 import SignIn from './screens/SignIn';
 import CartScreen from './screens/CartScreen';
-import userStore from './userStore';
 import { Provider } from 'react-redux';
+import store from './store.js';
       //<Route path="/cart" element={<Cart />} />
       //<Route path="/item" element={<Item />} />
 const router = createBrowserRouter(
@@ -27,10 +27,10 @@ const router = createBrowserRouter(
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-      <Provider store={userStore}>
-      <RouterProvider router={router} >
-        <App />
-      </RouterProvider>
+      <Provider store={store}>
+        <RouterProvider router={router} >
+          <App />
+        </RouterProvider>
       </Provider>
   </React.StrictMode>
 );
