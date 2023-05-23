@@ -6,6 +6,8 @@ import {createBrowserRouter, RouterProvider, Route, createRoutesFromElements} fr
 import ItemScreen from './screens/ItemScreen';
 import HomeScreen from './screens/HomeScreen';
 import SignUp from './screens/SignUp';
+import SignIn from './screens/SignIn';
+import CartScreen from './screens/CartScreen';
 
       //<Route path="/cart" element={<Cart />} />
       //<Route path="/item" element={<Item />} />
@@ -15,6 +17,8 @@ const router = createBrowserRouter(
 			<Route path="/" element={<HomeScreen />} />
 			<Route path="/item" element={<ItemScreen />} />
 			<Route path="/signup" element={<SignUp />} />
+			<Route path="/signin" element={<SignIn />} />
+			<Route path="/cart" element={<CartScreen />} />
 		</Route>
   )
 )

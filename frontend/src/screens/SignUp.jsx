@@ -5,26 +5,40 @@ function SignUp() {
 			<div className="logo flex flex-row items-center gap-1 text-5xl">
 				<GiSpectacleLenses size="75px" /> GADA
 			</div>
-			<div className="content flex flex-col py-5 px-3 gap-3 border-white rounded-3xl border-1">
+			<div className="content flex flex-col py-5 px-3 gap-5 border-white rounded-3xl border-2">
 				<h1 className='text-3xl'>Create Account</h1>
-				<form action="" className='flex flex-col gap-2 '>
+				<form action="" className='flex flex-col gap-5 '>
 					<div>
 						<label htmlFor="name">You name</label><br />
 						<input type="text" placeholder='First and last name' className='bg-transparent border-white border-2 py-1 px-1 rounded-1xl' />
 					</div>
 					<div className='flex flex-col gap-1'>
-						<label htmlFor="name">Mobile Number</label>
+						<label htmlFor="mobile">Mobile Number</label>
 						<div className='flex flex-row gap-3 justify-center items-center'>
 							<select id="number" name="" className='bg-transparent'>
-								<option value="india" className='bg-black'>+91 india</option>
-								<option value="america">+1 America</option>
-								<option value="uk">+44 Uk</option>
+								<option value="India" className='bg-bgColor'>+91 India</option>
+								<option value="America" className='bg-bgColor'>+1 America</option>
+								<option value="UK" className='bg-bgColor'>+44 UK</option>
 							</select>
-							<input type="text" placeholder='First and last name' className='bg-transparent border-white border-2 py-1 px-1 rounded-1xl' />
+							<input type="number" placeholder='Mobile Number' className='bg-transparent border-white border-2 py-1 px-1 rounded-1xl' />
 						</div>
 					</div>
+					<div>
+						<label htmlFor="Email">Enter your number</label><br />
+						<input type="email" placeholder='Enter email' className='bg-transparent border-white border-2 py-1 px-1 rounded-1xl' />
+					</div>
+					<div>
+						<label htmlFor="password">Enter your password</label><br />
+						<input type="password" placeholder='Enter password' className='bg-transparent border-white border-2 py-1 px-1 rounded-1xl' />
+					</div>
+					<div>
+						<label htmlFor="confirmPassword">Confirm Password</label><br />
+						<input type="confirmPassword" placeholder='Enter confirm password' className='bg-transparent border-white border-2 py-1 px-1 rounded-1xl' />
+					</div>
+					<input type="submit" className='border-2 border-white self-center w-56' />
 				</form>
 			</div>
+			<p>Already have an account ? <span className='text-cyan-800'>Sign In</span></p>
 		</div>
 	)
 }
