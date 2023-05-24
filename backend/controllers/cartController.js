@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken'
 import asyncHandler from 'express-async-handler'
 import { Shop } from '../models/shopModel.js'
 const getCartItems = asyncHandler(async (req, res) => {
+    console.log('call recevied')
     // Return an array of JSON objects containing item name and cookie 
     let items = req.cookies.cartItem
     console.log(items)
@@ -12,9 +13,9 @@ const getCartItems = asyncHandler(async (req, res) => {
         item_name.push(items[i].itemName)
     }
 
-    items = await Shop.find({name: item_name})
-    console.log(items)
-    res.status(200).send(items)
+    let new_items = await Shop.find({name: item_name})
+    console.log(new_items)
+    res.status(200).send({new_items, items})
 })
 
 const addToCart = asyncHandler(async (req, res) => {

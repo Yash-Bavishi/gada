@@ -1,5 +1,24 @@
 import tv from '../assets/image.jpg'
+import { useGetCartItemQuery } from '../slices/cartApiSlice'
+import CartItem from '../components/CartItem';
 function CartScreen() {
+
+    let {data, isLoading} = useGetCartItemQuery();
+    if (data) {
+        let new_items = data.new_items
+        let items = data.items
+        console.log(items)
+        let new_arr = new_items.map((element) => {
+            let temp = items.filter((ele) => {
+                return ele.itemName == element.name 
+            })
+            console.log(temp, "IDHAR")
+            return ({...element, quant: Number.parseInt(temp[0].quantity)})
+        })
+        new_items = new_arr
+        data = new_items
+    }
+
     return (
         <div className='Cart text-white mx-10'>
             <h1 className='text-center text-5xl my-4'>Your Cart</h1>
@@ -8,6 +27,14 @@ function CartScreen() {
                 <h4 className='text-base'>Price</h4>
             </div>
             <hr />
+            {isLoading ? <div className='text-white text-center'> Loading</div>:
+                data ? 
+                data.map((element) => 
+                    <CartItem key={element._id} dr={element} /> 
+                )
+                : <div className='text-white text-center'> No data </div> 
+            }
+           {/* 
             <div className="flex flex-row justify-between items-start my-10 gap-2 py-2 px-2 ">
                 <div className="flex my-10 gap-2 py-2 px-2 ">
                     <img src={tv} alt="A TV should come here" className='h-32' />
@@ -33,6 +60,7 @@ function CartScreen() {
                 </div>
                 <p>$100</p>
             </div>
+    */}
             <div className='flex flex-row-reverse'><button className='border-2 border-white py-2 px-4 rounded-2xl'>Buy</button></div>
         </div>
         )

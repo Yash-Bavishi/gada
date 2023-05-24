@@ -16,10 +16,10 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />} >
 			<Route path="/" element={<HomeScreen />} />
-			<Route path="/item" element={<ItemScreen />} />
+			<Route path="/item/:itemName" element={<ItemScreen />} />
 			<Route path="/signup" element={<SignUp />} />
 			<Route path="/signin" element={<SignIn />} />
-			<Route path="/cart" element={<CartScreen />} />
+			<Route path="/cart/" element={<CartScreen />} />
 		</Route>
   )
 )

@@ -26,8 +26,9 @@ const postItem = asyncHandler(async (req, res) => {
 })
 
 const getItem = asyncHandler (async (req, res) => {
+    console.log("CALL AYA")
     const itemName = req.params.itemName;
-    const count = Number.parseInt(req.params.count)
+    // const count = Number.parseInt(req.params.count)
 
     const item = await Shop.findOne({name: itemName})
     if(!item) {
@@ -35,13 +36,16 @@ const getItem = asyncHandler (async (req, res) => {
         throw new Error("Item not found")
     }    
 
+    /*
     if(item.quantity < count) {
         res.status(400)
         throw new Error("Not in stock")
     }
+    */
 
     res.status(200)
-    res.json({message: {name: item.name, quantity: item.quantity}})
+    console.log(item)
+    res.json(item)
 })
 
 

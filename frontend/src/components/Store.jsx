@@ -1,31 +1,17 @@
 import Item from './Item';
 import { useEffect, useState } from 'react';
 import { useGetPostsQuery } from '../slices/shopApiSlice';
-
+import {Link} from 'react-router-dom';
 function Store() {
 
-	useEffect(() => {
-
-		const { data } = useGetPostsQuery()
-		console.log(data)
-
-	}, [data])
-
-
+	const {data, isError, isLoading} = useGetPostsQuery()
 	return (
 		<div className="Store flex flex-row flex-wrap gap-5">
-			<Item />
-			<Item />
-			<Item />
-			<Item />
-			<Item />
-			<Item />
-			<Item />
-			<Item />
-			<Item />
-			<Item />
-			<Item />
-			<Item />
+			{isLoading ? 
+				<div>Loading</div> : 
+				data.items.map((element) => 
+					<Link to={'/item/'+element.name} key={element._id}><Item dr={element} key={element._id} /></Link>
+			)}
 		</div>
 	)
 }
