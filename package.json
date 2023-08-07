@@ -13,7 +13,7 @@
   "version": "1.0.0",
   "type": "module",
   "description": "Simple electronic store",
-  "main": "server.js",
+  "main": "backend/server.js",
   "devDependencies": {
     "nodemon": "^2.0.22"
   },
