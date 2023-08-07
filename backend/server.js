@@ -28,8 +28,10 @@ app.use('/api/cart', cartRoute)
 
 // Serve frontend
 if (process.env.NODE_ENV === 'production') {
-	app.use(express.static(path.join(__dirname, '../frontend/build')))
-	app.get('*', (req, res) => res.sendFile(path.resolve(__dirname, '../', 'build', 'index.html')))
+	//app.use(express.static(path.join(__dirname, '../frontend/build')))
+	//app.get('*', (req, res) => res.sendFile(path.resolve(__dirname, '../', 'frontend', 'build', 'index.html')))
+	app.use(express.static(path.join(__dirname, '../')))
+	app.get('*', (req, res) => res.sendFile(path.resolve(__dirname, '../', 'index.html')))
 } else {
 	app.get('/', (req, res) => res.send('Please set to production'))
 }
