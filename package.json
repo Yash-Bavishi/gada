@@ -20,7 +20,7 @@
   "scripts": {
     "start": "node backend/server.js",
     "server": "nodemon backend/server.js",
-    "build": "npm run start --prefix frontend",
+    "client": "npm run start --prefix frontend",
     "dev": "concurrently \"npm run start\" \"npm run client \""
   },
   "author": "king constryo",
