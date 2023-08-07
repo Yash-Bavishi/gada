@@ -6,6 +6,13 @@ import cartRoute from './routes/cartRoute.js'
 import { connectDB } from './config/db.js'
 import { errorHandler } from './middleware/errorHandler.js';
 import cookies from 'cookie-parser'
+import path from 'path'
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
 dotenv.config()
 
 connectDB()
@@ -13,7 +20,7 @@ const app = express();
 const PORT = process.env.PORT || 8000
 
 app.use(express.json())
-app.use(express.urlencoded())
+app.use(express.urlencoded({ extended: true }))
 app.use(cookies())
 app.use('/api/user', authServer)
 app.use('/api/shop', shopRoute)
