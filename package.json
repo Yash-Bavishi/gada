@@ -18,10 +18,10 @@
     "nodemon": "^2.0.22"
   },
   "scripts": {
-    "startServer": "node backend/server.js",
+    "start": "node backend/server.js",
     "server": "nodemon backend/server.js",
     "client": "npm run start --prefix frontend",
-    "start": "concurrently \"npm run server\" \"npm run client \""
+    "dev": "concurrently \"npm run server\" \"npm run client \""
   },
   "author": "king constryo",
   "license": "MIT"
